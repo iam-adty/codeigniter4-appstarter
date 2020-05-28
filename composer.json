@@ -6,7 +6,10 @@
 	"license": "MIT",
 	"require": {
 		"php": ">=7.2",
-		"codeigniter4/framework": "^4"
+		"codeigniter4/framework": "^4",
+        "slowprog/composer-copy-file": "~0.3",
+        "almasaeed2010/adminlte": "~3.0",
+		"phpdocumentor/reflection-docblock": "^5.1"
 	},
 	"require-dev": {
 		"mikey179/vfsstream": "1.6.*",
@@ -18,14 +21,24 @@
 		}
 	},
 	"scripts": {
-		"test": "phpunit",
+        "test": "phpunit",
+        "post-install-cmd": [
+            "SlowProg\\CopyFile\\ScriptHandler::copy"
+        ],
 		"post-update-cmd": [
-			"@composer dump-autoload"
+            "@composer dump-autoload",
+            "SlowProg\\CopyFile\\ScriptHandler::copy"
 		]
 	},
 	"support": {
 		"forum": "http://forum.codeigniter.com/",
 		"source": "https://github.com/codeigniter4/CodeIgniter4",
 		"slack": "https://codeigniterchat.slack.com"
-	}
+    },
+    "extra": {
+        "copy-file": {
+            "vendor/almasaeed2010/adminlte/dist/": "public/assets/vendor/adminlte/",
+            "vendor/almasaeed2010/adminlte/plugins/": "public/assets/vendor/adminlte/plugins/"
+        }
+    }
 }
