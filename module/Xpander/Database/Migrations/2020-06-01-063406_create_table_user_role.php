@@ -3,16 +3,21 @@
 use Xpander\Helpers\Database\Table\Field;
 use Xpander\Migration;
 
-class CreateTablePermission extends Migration
+class CreateTableUserRole extends Migration
 {
 	public function up()
 	{
         $this->db->transStart();
 
-		$this->forge->addField(
-            Field::increment() +
+        $this->forge->addField(array_merge(
+            Field::ID(),
+            Field::foreignID('status'),
+            Field::foreignID('user'),
+            Field::foreignID('role'),
             Field::trackable()
-        )->addPrimaryKey('id')->createTable('permission');
+        ))->addUniqueKey([
+            'user_id', 'role_id'
+        ])->addPrimaryKey('id')->createTable('user_role');
 
         $this->db->transComplete();
 	}
@@ -23,7 +28,7 @@ class CreateTablePermission extends Migration
 	{
         $this->db->transStart();
 
-        $this->forge->dropTable('permission');
+        $this->forge->dropTable('user_role', true);
 
         $this->db->transComplete();
 	}

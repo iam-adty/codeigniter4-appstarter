@@ -7,7 +7,7 @@ class Field
     public function __construct()
     {}
 
-    public static function increment($default = [
+    public static function ID($default = [
         'name' => 'id',
         'type' => 'INT',
         'unsigned' => true
@@ -77,7 +77,7 @@ class Field
         ];
     }
 
-    public static function foreignInteger($name = '', $default = [
+    public static function foreignID($name = '', $default = [
         'type' => 'INT',
         'unsigned' => true,
         'null' => false,
@@ -85,7 +85,7 @@ class Field
     ])
     {
         return [
-            $name => [
+            $name . '_id' => [
                 'type' => $default['type'] ?? 'INT',
                 'unsigned' => $default['unsigned'] ?? true,
                 'null' => $default['null'] ?? false,
@@ -94,7 +94,7 @@ class Field
         ];
     }
 
-    public static function parentInteger($name = 'parent_id', $default = [
+    public static function parentID($name = 'parent', $default = [
         'type' => 'INT',
         'unsigned' => true,
         'null' => false,
@@ -102,7 +102,7 @@ class Field
     ])
     {
         return [
-            $name => [
+            $name . '_id' => [
                 'type' => $default['type'] ?? 'INT',
                 'unsigned' => $default['unsigned'] ?? true,
                 'null' => $default['null'] ?? false,
@@ -207,6 +207,34 @@ class Field
                 'null' => false,
                 'default' => 0,
                 'unsigned' => true
+            ]
+        ];
+    }
+
+    public static function boolean($name = '', $default = [
+        'null' => false,
+        'default' => false
+    ])
+    {
+        return [
+            $name => [
+                'type' => 'BOOLEAN',
+                'null' => $default['null'] ?? false,
+                'default' => $default['default'] ?? false
+            ]
+        ];
+    }
+
+    public static function json($name = '', $default = [
+        'null' => true,
+        'default' => null
+    ])
+    {
+        return [
+            $name => [
+                'type' => 'JSON',
+                'null' => $default['null'] ?? true,
+                'default' => $default['default'] ?? null
             ]
         ];
     }
