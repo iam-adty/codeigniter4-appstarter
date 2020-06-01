@@ -2,6 +2,7 @@
 
 namespace Dashboard\Controllers;
 
+use Config\Services;
 use Xpander\Controller;
 
 /**
@@ -11,17 +12,23 @@ class Login extends Controller
 {
     public function index()
     {
-        if ($this->request->getPost('action')) {
-            
-        }
-
         helper('form');
 
-        return $this->view->render('Login');
+        return $this->_render(function () {
+            return $this->view->render('Login');
+        });
     }
 
     protected function _action_login()
     {
-        
+        if ($this->validate([
+            'email' => 'required|valid_email',
+            'password' => 'required'
+        ])) {
+            Services::session()->set('user', 'didit');
+            return redirect('dashboard');
+        } else {
+            Services::session()->setFlashdata('message', $this->validator->listErrors());
+        }
     }
 }

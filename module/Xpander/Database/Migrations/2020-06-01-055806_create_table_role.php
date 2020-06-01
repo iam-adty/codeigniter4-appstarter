@@ -13,8 +13,12 @@ class CreateTableRole extends Migration
             Field::ID(),
             Field::parentID(),
             Field::foreignID('status'),
-            Field::string('code', ['null' => false]),
-            Field::string('name', ['null' => false]),
+            Field::string('code', [
+                'null' => false
+            ]),
+            Field::string('name', [
+                'null' => false
+            ]),
             Field::text('description'),
             Field::orderingInteger('level'),
             Field::trackable()

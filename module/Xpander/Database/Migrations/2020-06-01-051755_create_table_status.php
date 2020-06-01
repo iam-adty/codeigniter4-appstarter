@@ -11,8 +11,12 @@ class CreateTableStatus extends Migration
 
         $this->forge->addField(array_merge(
             Field::ID(),
-            Field::string('code', ['null' => false]),
-            Field::string('name', ['null' => false]),
+            Field::string('code', [
+                'null' => false
+            ]),
+            Field::string('name', [
+                'null' => false
+            ]),
             Field::text('description'),
             Field::trackable()
         ))->addPrimaryKey('id')->addUniqueKey('code')->createTable('status');

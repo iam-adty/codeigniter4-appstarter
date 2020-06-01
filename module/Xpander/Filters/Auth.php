@@ -7,14 +7,20 @@ use Config\Services;
 
 class Auth implements FilterInterface
 {
-    public function before(\CodeIgniter\HTTP\RequestInterface $request)
+    protected $session;
+
+    public function __construct()
     {
-        $session = Services::session();
-        d($request);
+        $this->session = Services::session();
+    }
+
+    public function before(\CodeIgniter\HTTP\RequestInterface $request, $params = null)
+    {
+
     }
 
     public function after(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response)
     {
-        d($request, $response);
+
     }
 }

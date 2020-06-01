@@ -1,6 +1,7 @@
 <?php namespace Dashboard\Controllers;
 
 use AdminLTE\View\Component\Card;
+use Config\Services;
 use Xpander\Controller;
 
 /**
@@ -8,6 +9,11 @@ use Xpander\Controller;
  */
 class Dashboard extends Controller
 {
+    protected function _init()
+    {
+        $this->view->data->user->name = Services::session()->get('user');
+    }
+
     public function index()
     {
         $card = Card::create();

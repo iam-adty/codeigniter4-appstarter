@@ -32,8 +32,10 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
+                <?= \Config\Services::session()->getFlashdata('message'); ?>
+
                 <?= form_open() ?>
-                    <?= form_hidden('action', 'login') ?>
+                    <?= form_hidden('_action', 'login') ?>
                     <div class="input-group mb-3">
                         <input name="email" type="email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
