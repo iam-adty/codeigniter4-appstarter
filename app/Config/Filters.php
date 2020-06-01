@@ -9,14 +9,16 @@ class Filters extends BaseConfig
 	public $aliases = [
 		'csrf'     => \CodeIgniter\Filters\CSRF::class,
 		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
-		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
+        'honeypot' => \CodeIgniter\Filters\Honeypot::class,
+        'loginAuth' => \Xpander\Filters\Auth\WebAuth::class,
+        'dashboardAuth' => \Xpander\Filters\Auth\WebAuth::class
 	];
 
 	// Always applied before every request
 	public $globals = [
 		'before' => [
 			//'honeypot'
-			// 'csrf',
+			'csrf'
 		],
 		'after'  => [
 			'toolbar',

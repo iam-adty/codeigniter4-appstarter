@@ -6,11 +6,13 @@ use CodeIgniter\Router\RouteCollection;
 $routes->match([
     'get', 'post'
 ], 'login', 'Login::index', [
-    'namespace' => 'Dashboard\Controllers'
+    'namespace' => 'Dashboard\Controllers',
+    'filter' => 'loginAuth'
 ]);
 
 $routes->group('dashboard', [
-    'namespace' => 'Dashboard\Controllers'
+    'namespace' => 'Dashboard\Controllers',
+    'filter' => 'dashboardAuth'
 ], function ($routes) {
     $routes->match([
         'get', 'post'
