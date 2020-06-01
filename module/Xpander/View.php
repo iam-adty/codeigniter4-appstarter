@@ -13,6 +13,7 @@ class View
 
     public ?Data $data = null;
 
+    use ClassInitializerTrait;
     use PropertyInitializerTrait;
 
     public function __construct(array $config = [])
@@ -31,9 +32,6 @@ class View
         $this->_initProperty();
         $this->_init();
     }
-
-    protected function _init()
-    {}
 
     public function render()
     {

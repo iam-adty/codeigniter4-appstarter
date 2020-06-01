@@ -3,6 +3,7 @@
 namespace Xpander\View;
 
 use ReflectionClass;
+use Xpander\ClassInitializerTrait;
 use Xpander\PropertyInitializerTrait;
 
 class Component
@@ -12,6 +13,7 @@ class Component
 
     public ?Data $data = null;
 
+    use ClassInitializerTrait;
     use PropertyInitializerTrait;
 
     public function __construct(Data $data = null)
@@ -33,9 +35,6 @@ class Component
 
         $this->_init();
     }
-
-    protected function _init()
-    {}
 
     public function render()
     {

@@ -8,6 +8,7 @@ class Controller extends CodeIgniterController
 {
     protected View $view;
 
+    use ClassInitializerTrait;
     use PropertyInitializerTrait;
 
     public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
@@ -19,7 +20,4 @@ class Controller extends CodeIgniterController
         $this->_initProperty();
         $this->_init();
     }
-
-    protected function _init()
-    {}
 }

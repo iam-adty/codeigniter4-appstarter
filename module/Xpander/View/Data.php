@@ -2,10 +2,12 @@
 
 namespace Xpander\View;
 
+use Xpander\ClassInitializerTrait;
 use Xpander\PropertyInitializerTrait;
 
 class Data
 {
+    use ClassInitializerTrait;
     use PropertyInitializerTrait;
 
     public function __construct(array $data = [])
@@ -20,9 +22,6 @@ class Data
         $this->_initProperty();
         $this->_init();
     }
-
-    protected function _init()
-    {}
 
     use DataFactoryTrait;
 }
