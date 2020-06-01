@@ -33,8 +33,12 @@ class View
         $this->_init();
     }
 
-    public function render()
+    public function render($view = '')
     {
+        if (!empty($view)) {
+            $this->_view = $view;
+        }
+
         $autoloader = \Config\Services::autoloader();
         $viewFile = realpath($autoloader->getNamespace($this->_reflectionClass->getNamespaceName())[0]) . '/Views/' . $this->_view . '.php';
 
