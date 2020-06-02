@@ -2,22 +2,18 @@
 
 use Xpander\Migration;
 
-class SeedTableUser extends Migration
+class SeedTableUserRole extends Migration
 {
 	public function up()
 	{
-        helper('text');
-
         $this->db->transStart();
 
         $date = date('Y-m-d H:i:s');
 
-        $this->db->table('user')->insertBatch([
+        $this->db->table('user_role')->insertBatch([
             [
-                'code' => 'system',
-                'email' => 'system@yourdomain.com',
-                'name' => 'System',
-                'password' => password_hash(random_string('sha1'), PASSWORD_ARGON2ID),
+                'user_id' => 1,
+                'role_id' => 1,
                 'status_id' => 1,
                 'created_at' => $date,
                 'updated_at' => $date,
@@ -25,10 +21,8 @@ class SeedTableUser extends Migration
                 'updated_by' => 1
             ],
             [
-                'code' => 'developer',
-                'email' => 'developer@yourdomain.com',
-                'name' => 'Developer',
-                'password' => password_hash('12345678', PASSWORD_ARGON2ID),
+                'user_id' => 2,
+                'role_id' => 3,
                 'status_id' => 1,
                 'created_at' => $date,
                 'updated_at' => $date,
@@ -36,10 +30,8 @@ class SeedTableUser extends Migration
                 'updated_by' => 1
             ],
             [
-                'code' => 'administrator',
-                'email' => 'administrator@yourdomain.com',
-                'name' => 'Aministrator',
-                'password' => password_hash('12345678', PASSWORD_ARGON2ID),
+                'user_id' => 3,
+                'role_id' => 3,
                 'status_id' => 1,
                 'created_at' => $date,
                 'updated_at' => $date,
@@ -57,7 +49,7 @@ class SeedTableUser extends Migration
 	{
         $this->db->transStart();
 
-        $this->db->table('user')->truncate();
+        $this->db->table('user_role')->truncate();
 
         $this->db->transComplete();
 	}

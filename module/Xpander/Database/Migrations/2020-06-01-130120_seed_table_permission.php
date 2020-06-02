@@ -40,6 +40,66 @@ class SeedTablePermission extends Migration
                 'updated_at' => $date,
                 'created_by' => 1,
                 'updated_by' => 1
+            ],
+            [
+                'code' => 'dashboardSettingSite',
+                'name' => 'Dashboard/Setting/Site',
+                'description' => 'Dashboard/Setting/Site',
+                'status_id' => 1,
+                'created_at' => $date,
+                'updated_at' => $date,
+                'created_by' => 1,
+                'updated_by' => 1
+            ],
+            [
+                'code' => 'dashboardSettingRoleAndPermission',
+                'name' => 'Dashboard/Setting/Role & Permission',
+                'description' => 'Dashboard/Setting/Role & Permission',
+                'status_id' => 1,
+                'created_at' => $date,
+                'updated_at' => $date,
+                'created_by' => 1,
+                'updated_by' => 1
+            ],
+            [
+                'code' => 'dashboardSettingUser',
+                'name' => 'Dashboard/Setting/User',
+                'description' => 'Dashboard/Setting/User',
+                'status_id' => 1,
+                'created_at' => $date,
+                'updated_at' => $date,
+                'created_by' => 1,
+                'updated_by' => 1
+            ],
+            [
+                'code' => 'dashboardSettingDatabase',
+                'name' => 'Dashboard/Setting/Database',
+                'description' => 'Dashboard/Setting/Database',
+                'status_id' => 1,
+                'created_at' => $date,
+                'updated_at' => $date,
+                'created_by' => 1,
+                'updated_by' => 1
+            ],
+            [
+                'code' => 'dashboardSettingDatabasePanel',
+                'name' => 'Dashboard/Setting/Database/Panel',
+                'description' => 'Dashboard/Setting/Database/Panel',
+                'status_id' => 1,
+                'created_at' => $date,
+                'updated_at' => $date,
+                'created_by' => 1,
+                'updated_by' => 1
+            ],
+            [
+                'code' => 'dashboardSettingDatabaseMigration',
+                'name' => 'Dashboard/Setting/Database/Migration',
+                'description' => 'Dashboard/Setting/Database/Migration',
+                'status_id' => 1,
+                'created_at' => $date,
+                'updated_at' => $date,
+                'created_by' => 1,
+                'updated_by' => 1
             ]
         ]);
 
