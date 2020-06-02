@@ -30,5 +30,9 @@ class Dashboard extends Controller
         $this->view->data->template->content = $card->render();
 
         return $this->view->render();
+
+        return $this->_render(function () {
+            return $this->view->render();
+        });
     }
 }
