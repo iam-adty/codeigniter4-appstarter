@@ -15,7 +15,7 @@ class SeedTableMenuType extends Migration
                 'code' => 'dashboard',
                 'name' => 'Dashboard',
                 'description' => 'Dashboard',
-                'status' => 1,
+                'status_id' => 1,
                 'created_at' => $date,
                 'deleted_at' => $date,
                 'status_id' => 1,

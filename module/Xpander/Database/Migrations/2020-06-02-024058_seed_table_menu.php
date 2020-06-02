@@ -12,6 +12,7 @@ class SeedTableMenu extends Migration
 
         $this->db->table('menu')->insertBatch([
             [
+                'parent_id' => 0,
                 'code' => 'dashboard',
                 'name' => 'Dashboard',
                 'description' => 'Dashboard',
@@ -23,9 +24,11 @@ class SeedTableMenu extends Migration
                 'created_by' => 1,
                 'updated_by' => 1,
                 'level' => 1,
-                'sequence_position' => 1
+                'sequence_position' => 1,
+                'type_id' => 1
             ],
             [
+                'parent_id' => 0,
                 'code' => 'dashboardSetting',
                 'name' => 'Setting',
                 'description' => 'Dashboard Setting',
@@ -37,7 +40,8 @@ class SeedTableMenu extends Migration
                 'created_by' => 1,
                 'updated_by' => 1,
                 'level' => 1,
-                'sequence_position' => 99
+                'sequence_position' => 99,
+                'type_id' => 1
             ],
             [
                 'parent_id' => 2,
@@ -52,7 +56,8 @@ class SeedTableMenu extends Migration
                 'created_by' => 1,
                 'updated_by' => 1,
                 'level' => 2,
-                'sequence_position' => 1
+                'sequence_position' => 1,
+                'type_id' => 1
             ],
             [
                 'parent_id' => 2,
@@ -67,7 +72,8 @@ class SeedTableMenu extends Migration
                 'created_by' => 1,
                 'updated_by' => 1,
                 'level' => 2,
-                'sequence_position' => 2
+                'sequence_position' => 2,
+                'type_id' => 1
             ],
             [
                 'parent_id' => 2,
@@ -82,7 +88,8 @@ class SeedTableMenu extends Migration
                 'created_by' => 1,
                 'updated_by' => 1,
                 'level' => 2,
-                'sequence_position' => 3
+                'sequence_position' => 3,
+                'type_id' => 1
             ],
             [
                 'parent_id' => 2,
@@ -97,7 +104,8 @@ class SeedTableMenu extends Migration
                 'created_by' => 1,
                 'updated_by' => 1,
                 'level' => 2,
-                'sequence_position' => 99
+                'sequence_position' => 99,
+                'type_id' => 1
             ],
             [
                 'parent_id' => 6,
@@ -112,7 +120,8 @@ class SeedTableMenu extends Migration
                 'created_by' => 1,
                 'updated_by' => 1,
                 'level' => 3,
-                'sequence_position' => 1
+                'sequence_position' => 1,
+                'type_id' => 1
             ],
             [
                 'parent_id' => 6,
@@ -127,7 +136,8 @@ class SeedTableMenu extends Migration
                 'created_by' => 1,
                 'updated_by' => 1,
                 'level' => 3,
-                'sequence_position' => 2
+                'sequence_position' => 2,
+                'type_id' => 1
             ]
         ]);
 

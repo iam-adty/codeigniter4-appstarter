@@ -166,7 +166,20 @@ class SeedTableRolePermission extends Migration
                 'updated_at' => $date,
                 'created_by' => 1,
                 'updated_by' => 1
-            ]
+            ],
+            [
+                'role_id' => 3,
+                'permission_id' => 6,
+                'status_id' => 1,
+                'C' => true,
+                'R' => true,
+                'U' => true,
+                'D' => true,
+                'created_at' => $date,
+                'updated_at' => $date,
+                'created_by' => 1,
+                'updated_by' => 1
+            ],
         ]);
 
         $this->db->transComplete();

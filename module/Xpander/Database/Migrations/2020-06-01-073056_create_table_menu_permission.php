@@ -14,6 +14,10 @@ class CreateTableMenuPermission extends Migration
             Field::foreignID('status'),
             Field::foreignID('menu'),
             Field::foreignID('permission'),
+            Field::boolean('C'),
+            Field::boolean('R'),
+            Field::boolean('U'),
+            Field::boolean('D'),
             Field::trackable()
         ))->addUniqueKey([
             'menu_id', 'permission_id'
