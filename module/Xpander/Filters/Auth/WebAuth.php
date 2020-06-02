@@ -17,7 +17,13 @@ class WebAuth extends Auth
                 if (!$this->session->has('user')) {
                     return redirect('login');
                 }
+            } else {
+                $this->session->destroy();
+                return redirect('login');
             }
-        } elseif (in_array('api', $params)) {}
+        } else {
+            $this->session->destroy();
+            return redirect('login');
+        }
     }
 }
