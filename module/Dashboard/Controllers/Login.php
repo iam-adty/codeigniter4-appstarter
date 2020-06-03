@@ -4,6 +4,7 @@ namespace Dashboard\Controllers;
 
 use Config\Services;
 use Xpander\Controller;
+use Xpander\Models\User;
 
 /**
  * @property Dashboard\View $view
@@ -21,12 +22,19 @@ class Login extends Controller
 
     protected function _action_login()
     {
+        $userModel = new User();
+
         if ($this->validate([
             'email' => 'required|valid_email',
             'password' => 'required'
         ])) {
-            Services::session()->set('user', 'didit');
-            return redirect('dashboard');
+            $user = $userModel
+                ->where('user.email', $this->request->getPost('email'))
+                ->where('status.code', 'active')
+                ->withRelation()
+                ->first();
+            
+            d($user);
         } else {
             Services::session()->setFlashdata('message', $this->validator->listErrors());
         }
