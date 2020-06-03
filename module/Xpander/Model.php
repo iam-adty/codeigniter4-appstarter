@@ -18,62 +18,80 @@ class Model extends CodeIgniterModel
     protected $dateFormat = 'datetime';
 
     protected $withRelation = false;
-    protected $relations = [];
 
-    /**
-     * Provides a shared instance of the Query Builder.
-     *
-     * @param string $table
-     *
-     * @return BaseBuilder
-     * @throws \CodeIgniter\Exceptions\ModelException;
-     */
-    protected function builder(string $table = null)
-    {
-        if ($this->builder instanceof BaseBuilder) {
-            return $this->builder;
-        }
+    // /**
+    //  * Provides a shared instance of the Query Builder.
+    //  *
+    //  * @param string $table
+    //  *
+    //  * @return BaseBuilder
+    //  * @throws \CodeIgniter\Exceptions\ModelException;
+    //  */
+    // protected function builder(string $table = null)
+    // {
+    //     if ($this->builder instanceof BaseBuilder) {
+    //         return $this->builder;
+    //     }
 
-        // We're going to force a primary key to exist
-        // so we don't have overly convoluted code,
-        // and future features are likely to require them.
-        if (empty($this->primaryKey)) {
-            throw ModelException::forNoPrimaryKey(get_class($this));
-        }
+    //     // We're going to force a primary key to exist
+    //     // so we don't have overly convoluted code,
+    //     // and future features are likely to require them.
+    //     if (empty($this->primaryKey)) {
+    //         throw ModelException::forNoPrimaryKey(get_class($this));
+    //     }
 
-        $table = empty($table) ? $this->table : $table;
+    //     $table = empty($table) ? $this->table : $table;
 
-        // Ensure we have a good db connection
-        if (!$this->db instanceof BaseConnection) {
-            $this->db = Database::connect($this->DBGroup);
-        }
+    //     // Ensure we have a good db connection
+    //     if (!$this->db instanceof BaseConnection) {
+    //         $this->db = Database::connect($this->DBGroup);
+    //     }
 
-        $this->builder = $this->db->table($table);
+    //     $this->builder = $this->db->table($table);
 
-        if ($this->withRelation) {
-            $this->_calculateRelation();
-            $this->withRelation = false;
-        }
+    //     if ($this->withRelation) {
+    //         $this->_buildRelation("{$this->returnType}::RELATION", [
+    //             'name' => $this->table
+    //         ]);
+    //         $this->withRelation = false;
+    //     }
 
-        return $this->builder;
-    }
+    //     return $this->builder;
+    // }
 
     public function withRelation()
     {
-        $this->withRelation = true;
+        $this->_buildRelation("{$this->returnType}::RELATION", [
+            'name' => $this->table
+        ]);
+
         return $this;
     }
 
-    protected function _calculateRelation()
+    protected function _buildRelation($rConstantName = '', $options = [])
     {
-        if (defined($this->returnType . '::RELATION')) {
-            foreach (constant($this->returnType . '::RELATION') as $type => $definitions) {
+        if (defined($rConstantName)) {
+            foreach (constant($rConstantName) as $type => $definitions) {
                 foreach ($definitions as $name => $definition) {
                     if ($type == 'hasOne') {
-                        $this->builder->join($name, "{$name}.id = {$this->table}.{$name}_id");
+                        $prefix = (isset($options['from']) ? "{$options['from']}_" : '');
+                        $alias = "{$prefix}{$options['name']}_{$name}";
+                        $this->join("{$name} {$alias}", "{$alias}.id = {$prefix}{$options['name']}.{$name}_id");
                     } elseif ($type == 'hasMany') {
-                        // check for bridge first
-                        // $this->builder->join($name, "{$name}.id = {$this->table}_{$name}.{$this->table}_id");
+                        if (count($definition) == 3) {
+                            $this->_buildRelation("{$definition[2]}::RELATION", [
+                                'name' => $name,
+                                'from' => $options['name']
+                            ]);
+                        } elseif (count($definition) == 2) {
+                            $this->join($name, "{$name}.{$options['name']}_{$definition[0]} = {$options['name']}.{$definition[0]}");
+                        }
+                    } elseif ($type == 'isBridgeOf') {
+                        if ($name == $options['from']) {
+                            $this->join("{$name}_{$options['name']}", "{$name}_{$options['name']}.{$definition[0]} = {$name}.id");
+                        } elseif ($name = $options['name']) {
+                            $this->join("{$name}", "{$name}.id = {$options['from']}_{$name}.{$definition[0]}");
+                        }
                     }
                 }
             }

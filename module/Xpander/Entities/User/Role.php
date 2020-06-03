@@ -2,10 +2,7 @@
 
 namespace Xpander\Entities\User;
 
-use Xpander\Entities\Role as EntitiesRole;
-use Xpander\Entities\Status;
 use Xpander\Entity;
-use Xpander\Models\User;
 
 class Role extends Entity
 {
@@ -17,11 +14,17 @@ class Role extends Entity
 
     const RELATION = [
         'hasOne' => [
-            'status' => [ 'status_id', Status::class ]
+            'status' => [
+                'status_id', \Xpander\Entities\Status::class
+            ],
         ],
         'isBridgeOf' => [
-            'user' => [ 'user_id', User::class ],
-            'role' => [ 'role_id', EntitiesRole::class ]
-        ]
+            'user' => [
+                'user_id', \Xpander\Entities\User::class
+            ],
+            'role' => [
+                'role_id', \Xpander\Entities\Role::class
+            ],
+        ],
     ];
 }

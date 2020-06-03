@@ -22,4 +22,20 @@ class Permission extends Entity
         'U' => 'isUpdate',
         'D' => 'isDelete'
     ];
+
+    const RELATION = [
+        'hasOne' => [
+            'status' => [
+                'status_id', \Xpander\Entities\Status::class,
+            ],
+        ],
+        'isBridgeOf' => [
+            'role' => [
+                'role_id', \Xpander\Entities\Role::class
+            ],
+            'permission' => [
+                'permission_id', \Xpander\Entities\Permission::class
+            ],
+        ],
+    ];
 }

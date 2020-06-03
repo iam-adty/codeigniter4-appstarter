@@ -14,4 +14,17 @@ class Role extends Entity
         'level' => 'integer',
         'parent_id' => 'integer'
     ];
+
+    const RELATION = [
+        'hasOne' => [
+            'status' => [
+                'status_id', Status::class
+            ],
+        ],
+        'hasMany' => [
+            'permission' => [
+                'id', Permission::class, \Xpander\Entities\Role\Permission::class
+            ],
+        ],
+    ];
 }

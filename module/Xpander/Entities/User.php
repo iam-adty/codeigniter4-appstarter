@@ -2,8 +2,6 @@
 
 namespace Xpander\Entities;
 
-use Xpander\Entities\User\Permission as UserPermission;
-use Xpander\Entities\User\Role as UserRole;
 use Xpander\Entity;
 
 class User extends Entity
@@ -18,11 +16,17 @@ class User extends Entity
 
     const RELATION = [
         'hasOne' => [
-            'status' => [ 'status_id', Status::class ]
+            'status' => [
+                'status_id', Status::class
+            ]
         ],
         'hasMany' => [
-            'role' => [ 'id', Role::class, UserRole::class ],
-            'permission' => [ 'id', Permission::class, UserPermission::class ]
+            'role' => [
+                'id', Role::class, \Xpander\Entities\User\Role::class
+            ],
+            'permission' => [
+                'id', Permission::class, \Xpander\Entities\User\Permission::class
+            ]
         ]
     ];
 }

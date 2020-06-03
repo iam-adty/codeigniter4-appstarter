@@ -2,9 +2,6 @@
 
 namespace Xpander\Entities\User;
 
-use Xpander\Entities\Permission as EntitiesPermission;
-use Xpander\Entities\Status;
-use Xpander\Entities\User;
 use Xpander\Entity;
 
 class Permission extends Entity
@@ -21,11 +18,17 @@ class Permission extends Entity
 
     const RELATION = [
         'hasOne' => [
-            'status' => [ 'status_id', Status::class ]
+            'status' => [
+                'status_id', \Xpander\Entities\Status::class
+            ],
         ],
         'isBridgeOf' => [
-            'user' => [ 'user_id', User::class ],
-            'permission' => [ 'permission_id', EntitiesPermission::class ]
-        ]
+            'user' => [
+                'user_id', \Xpander\Entities\User::class
+            ],
+            'permission' => [
+                'permission_id', \Xpander\Entities\Permission::class
+            ],
+        ],
     ];
 }

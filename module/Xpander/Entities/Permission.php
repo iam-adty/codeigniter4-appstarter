@@ -12,4 +12,12 @@ class Permission extends Entity
         'description' => 'string',
         'status_id' => 'integer'
     ];
+
+    const RELATION = [
+        'hasOne' => [
+            'status' => [
+                'status_id', Status::class
+            ],
+        ],
+    ];
 }

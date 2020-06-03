@@ -29,11 +29,11 @@ class Login extends Controller
             'password' => 'required'
         ])) {
             $user = $userModel
+                ->withRelation()
                 ->where('user.email', $this->request->getPost('email'))
                 ->where('status.code', 'active')
-                ->withRelation()
-                ->first();
-            
+                ->getCompiledSelect();
+
             d($user);
         } else {
             Services::session()->setFlashdata('message', $this->validator->listErrors());
