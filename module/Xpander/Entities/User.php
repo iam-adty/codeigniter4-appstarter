@@ -14,19 +14,58 @@ class User extends Entity
         'password' => 'string',
     ];
 
-    const RELATION = [
-        'hasOne' => [
-            'status' => [
-                'status_id', Status::class
-            ]
-        ],
-        'hasMany' => [
-            'role' => [
-                'id', Role::class, \Xpander\Entities\User\Role::class
+    const SCHEMA = [
+        'role' => [
+            Role::class,
+            '$pivot' => [
+                \Xpander\Entities\User\Role::class,
+                '$source' => 'user_id',
+                '$target' => 'role_id',
+                'status' => [
+                    Status::class,
+                    '$source' => 'status_id',
+                ],
             ],
             'permission' => [
-                'id', Permission::class, \Xpander\Entities\User\Permission::class
-            ]
-        ]
+                Permission::class,
+                '$pivot' => [
+                    \Xpander\Entities\Role\Permission::class,
+                    '$source' => 'role_id',
+                    '$target' => 'permission_id',
+                    'status' => [
+                        Status::class,
+                        '$source' => 'status_id',
+                    ],
+                ],
+                'status' => [
+                    Status::class,
+                    '$source' => 'status_id',
+                ],
+            ],
+            'status' => [
+                Status::class,
+                '$source' => 'status_id',
+            ],
+        ],
+        'permission' => [
+            Permission::class,
+            '$pivot' => [
+                \Xpander\Entities\User\Permission::class,
+                '$source' => 'user_id',
+                '$target' => 'permission_id',
+                'status' => [
+                    Status::class,
+                    '$source' => 'status_id',
+                ],
+            ],
+            'status' => [
+                Status::class,
+                '$source' => 'status_id',
+            ],
+        ],
+        'status' => [
+            Status::class,
+            '$source' => 'status_id',
+        ],
     ];
 }

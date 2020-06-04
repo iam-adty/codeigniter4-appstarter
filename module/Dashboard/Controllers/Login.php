@@ -29,7 +29,7 @@ class Login extends Controller
             'password' => 'required'
         ])) {
             $user = $userModel
-                ->withRelation()
+                ->withSchema()
                 ->where('user.email', $this->request->getPost('email'))
                 ->where('status.code', 'active')
                 ->getCompiledSelect();
