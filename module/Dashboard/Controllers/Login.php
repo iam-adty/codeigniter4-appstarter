@@ -31,7 +31,7 @@ class Login extends Controller
             $user = $userModel
                 ->withSchema()
                 ->where('user.email', $this->request->getPost('email'))
-                ->where('status.code', 'active')
+                ->where('user_status.code', 'active')
                 ->getCompiledSelect();
 
             d($user);
